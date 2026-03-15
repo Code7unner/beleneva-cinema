@@ -34,3 +34,7 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+.editing-cover {
+  height: clamp(300px, 31vw, 595px);
+}

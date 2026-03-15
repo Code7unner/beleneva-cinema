@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import SectionLabel from '../ui/SectionLabel'
 import { reviews } from '../../data/courses'
 
 export default function Footer() {
@@ -12,109 +11,222 @@ export default function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
   return (
-    <footer id="contacts" className="bg-[#0e1012] pt-16 pb-8 px-8 md:px-16">
+    <footer id="contacts" style={{ backgroundColor: '#0e1012' }}>
       {/* Contacts + Reviews */}
-      <div className="max-w-[1600px] mx-auto">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 mb-16">
+      <div
+        style={{
+          paddingTop: 'clamp(64px, 10.26vw, 197px)',
+          paddingLeft: 'clamp(24px, 9.84vw, 189px)',
+          paddingRight: 'clamp(24px, 9.58vw, 184px)',
+        }}
+      >
+        <div className="flex flex-col lg:flex-row" style={{ gap: '64px' }}>
 
-          {/* Contacts */}
-          <div className="flex-1">
-            <SectionLabel text="КОНТАКТЫ" className="mb-8" />
-            <h2 className="text-[#e6e6e6] text-3xl md:text-[32px] font-medium leading-tight mb-8 max-w-md">
-              Свяжитесь со мной любым удобным способом
-            </h2>
-            <div className="flex flex-col gap-4">
-              <a
-                href="mailto:beleneva_irina@mail.ru"
-                className="text-[#e6e6e6] text-base font-bold tracking-widest uppercase hover:text-white transition-colors"
+          {/* Left: Contacts */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '80px', flexShrink: 0 }} className="w-full lg:w-[558px]">
+
+            {/* Section label */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '64px' }}>
+              <span style={{ width: '16px', height: '16px', borderRadius: '50%', backgroundColor: '#8f1d1d', flexShrink: 0, display: 'inline-block' }} />
+              <span style={{ color: '#e6e6e6', fontSize: '24px', fontWeight: 700, lineHeight: '36px' }}>КОНТАКТЫ</span>
+            </div>
+
+            {/* Title + contacts */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '64px' }}>
+              <h2 style={{ color: '#e6e6e6', fontSize: '32px', fontWeight: 500, lineHeight: 1.5, margin: 0, textTransform: 'uppercase' }}>
+                Свяжитесь со мной любым удобным способом
+              </h2>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+                {/* Email */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  <span style={{ color: '#b3b3b3', fontSize: '18px', fontWeight: 400, textTransform: 'uppercase' }}>Email</span>
+                  <a href="mailto:beleneva_irina@mail.ru" style={{ color: '#e6e6e6', fontSize: '24px', fontWeight: 500, textDecoration: 'none', textTransform: 'uppercase' }}>
+                    Beleneva_irina@mail.ru
+                  </a>
+                </div>
+
+                {/* Phone */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  <span style={{ color: '#b3b3b3', fontSize: '18px', fontWeight: 400, textTransform: 'uppercase' }}>Телефон</span>
+                  <a href="tel:+79811690818" style={{ color: '#e6e6e6', fontSize: '24px', fontWeight: 500, textDecoration: 'none' }}>
+                    + 7 (981) 169 0818
+                  </a>
+                </div>
+
+                {/* Telegram icon */}
+                <a
+                  href="https://t.me/"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Telegram"
+                  style={{ display: 'inline-block', width: '32px', height: '32px' }}
+                >
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="M23.2 9.5L20.5 22.8C20.3 23.7 19.7 24 18.9 23.5L14.9 20.6L13 22.4C12.8 22.6 12.6 22.8 12.2 22.8L12.5 18.7L20 12C20.3 11.7 19.9 11.6 19.5 11.9L10.4 17.6L6.5 16.4C5.6 16.1 5.6 15.5 6.7 15L22.1 9.1C22.8 8.8 23.5 9.2 23.2 9.5Z" fill="#e6e6e6" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Reviews + Telegram button */}
+          <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: '64px' }}>
+
+            {/* Review slider — fixed 941×419 in Figma */}
+            <div className="lg:h-[419px]" style={{ position: 'relative', backgroundColor: '#313131', borderRadius: '32px', width: '100%', overflow: 'hidden' }}>
+
+              {/* Slides strip */}
+              <div
+                style={{
+                  display: 'flex',
+                  height: '100%',
+                  transition: 'transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)',
+                  transform: `translateX(-${reviewIdx * 100}%)`,
+                }}
               >
-                BELENEVA_IRINA@MAIL.RU
-              </a>
-              <a
-                href="tel:+79861090018"
-                className="text-[#e6e6e6] text-base font-bold tracking-widest uppercase hover:text-white transition-colors"
+                {reviews.map((review) => (
+                  <div
+                    key={review.id}
+                    style={{
+                      width: '100%',
+                      flexShrink: 0,
+                      height: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    {/* Arrow left zone */}
+                    <div style={{ width: 'clamp(40px, 6.35vw, 122px)', flexShrink: 0 }} />
+
+                    {/* Content */}
+                    <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 'clamp(16px, 1.67vw, 32px)', paddingTop: 'clamp(20px, 2.08vw, 40px)', paddingBottom: 'clamp(30px, 2.6vw, 50px)' }}>
+                      <p style={{ color: '#e6e6e6', fontSize: 'clamp(14px, 1.04vw, 20px)', fontWeight: 700, textAlign: 'center', margin: 0, textTransform: 'uppercase' }}>
+                        Отзывы о работе в школе:
+                      </p>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(12px, 1.25vw, 24px)' }}>
+                        <p style={{ color: '#e6e6e6', fontSize: 'clamp(13px, 0.94vw, 18px)', fontWeight: 400, lineHeight: 1.5, margin: 0 }}>
+                          {review.text}
+                        </p>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', alignItems: 'flex-end' }}>
+                          <p style={{ color: '#e6e6e6', fontSize: 'clamp(14px, 1.04vw, 20px)', fontWeight: 700, margin: 0 }}>
+                            {review.author}
+                          </p>
+                          <p style={{ color: '#b3b3b3', fontSize: 'clamp(12px, 0.94vw, 18px)', fontWeight: 400, margin: 0, textTransform: 'uppercase' }}>
+                            {review.role}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Arrow right zone */}
+                    <div style={{ width: 'clamp(40px, 6.35vw, 122px)', flexShrink: 0 }} />
+                  </div>
+                ))}
+              </div>
+
+              {/* Arrow left (absolute, clickable) */}
+              <button
+                onClick={prev}
+                aria-label="Предыдущий"
+                style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 'clamp(40px, 6.35vw, 122px)', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer', zIndex: 2 }}
               >
-                +7 (986) 109 0018
-              </a>
-              <a
-                href="https://t.me/"
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2 text-[#e6e6e6] hover:text-white transition-colors"
-                aria-label="Telegram"
-              >
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.26 13.49l-2.98-.924c-.648-.204-.661-.648.136-.961l11.647-4.492c.537-.194 1.006.131.831.108z"/>
+                <svg width="17" height="30" viewBox="0 0 17 30" fill="none">
+                  <path d="M15 2L2 15L15 28" stroke="#e6e6e6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </a>
-            </div>
-          </div>
+              </button>
 
-          {/* Reviews */}
-          <div className="flex-1 max-w-xl">
-            <div className="relative bg-[#313131] p-8 min-h-[200px] flex flex-col justify-between">
-              <div>
-                <div className="flex gap-1 mb-4">
-                  {Array.from({ length: reviews[reviewIdx].stars }).map((_, i) => (
-                    <span key={i} className="text-[#8f1d1d] text-lg">★</span>
-                  ))}
-                </div>
-                <p className="text-[#e6e6e6] text-sm leading-relaxed mb-4">
-                  {reviews[reviewIdx].text}
-                </p>
-                <p className="text-[#b3b3b3] text-sm font-bold">
-                  {reviews[reviewIdx].author}
-                </p>
-              </div>
-              {/* Arrows */}
-              <div className="flex items-center gap-4 mt-6">
-                <button onClick={prev} className="text-[#e6e6e6] hover:text-white transition-colors text-xl">‹</button>
-                <div className="flex gap-2">
-                  {reviews.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setReviewIdx(i)}
-                      className={`w-2 h-2 rounded-full transition-colors ${i === reviewIdx ? 'bg-[#e6e6e6]' : 'bg-[#b3b3b3]'}`}
-                    />
-                  ))}
-                </div>
-                <button onClick={next} className="text-[#e6e6e6] hover:text-white transition-colors text-xl">›</button>
-              </div>
-            </div>
-            <div className="mt-4">
-              <a
-                href="https://t.me/"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center bg-[#e6e6e6] text-[#0e1012] text-sm font-bold tracking-widest uppercase px-6 py-3 hover:bg-white transition-colors"
+              {/* Arrow right (absolute, clickable) */}
+              <button
+                onClick={next}
+                aria-label="Следующий"
+                style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 'clamp(40px, 6.35vw, 122px)', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer', zIndex: 2 }}
               >
-                TELEGRAM киношколы
-              </a>
+                <svg width="17" height="30" viewBox="0 0 17 30" fill="none">
+                  <path d="M2 2L15 15L2 28" stroke="#e6e6e6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+
+              {/* Dots */}
+              <div style={{ position: 'absolute', bottom: '16px', left: 0, right: 0, display: 'flex', justifyContent: 'center', gap: '10px', zIndex: 2 }}>
+                {reviews.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setReviewIdx(i)}
+                    aria-label={'Отзыв ' + (i + 1)}
+                    style={{ width: '10px', height: '10px', borderRadius: '50%', border: 'none', cursor: 'pointer', backgroundColor: i === reviewIdx ? '#e6e6e6' : '#666', padding: 0 }}
+                  />
+                ))}
+              </div>
             </div>
+
+            {/* Telegram school button — right-aligned */}
+            <a
+              href="https://t.me/"
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                alignSelf: 'flex-end',
+                backgroundColor: '#e6e6e6',
+                color: '#0e1012',
+                fontSize: '14px',
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                padding: '16px 32px',
+                borderRadius: '32px',
+                textDecoration: 'none',
+              }}
+            >
+              TELEGRAM киношколы
+            </a>
           </div>
         </div>
+      </div>
 
-        {/* Bottom menu */}
-        <div className="border-t border-[#313131] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <nav className="flex flex-wrap gap-8">
-            <Link to="/about" className="text-[#e6e6e6] text-base font-bold tracking-widest uppercase hover:text-white transition-colors">
-              ОБО МНЕ
-            </Link>
-            <Link to="/portfolio" className="text-[#e6e6e6] text-base font-bold tracking-widest uppercase hover:text-white transition-colors">
-              ПОРТФОЛИО
-            </Link>
-            <Link to="/courses" className="text-[#e6e6e6] text-base font-bold tracking-widest uppercase hover:text-white transition-colors">
-              КУРСЫ
-            </Link>
-          </nav>
-          <button
-            onClick={scrollToTop}
-            className="flex items-center justify-center w-12 h-12 border border-[#e6e6e6] text-[#e6e6e6] hover:bg-[#e6e6e6] hover:text-[#0e1012] transition-all"
-            aria-label="Наверх"
-          >
-            ↑
-          </button>
-        </div>
+      {/* Bottom menu */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          height: '195px',
+          paddingLeft: 'clamp(24px, 9.84vw, 189px)',
+          paddingRight: 'clamp(24px, 9.58vw, 184px)',
+        }}
+      >
+        <nav style={{ display: 'flex', alignItems: 'center' }} className="gap-8 lg:gap-[308px]">
+          <Link to="/about" style={{ color: '#e6e6e6', fontSize: '16px', fontWeight: 700, textDecoration: 'none' }}>
+            ОБО МНЕ
+          </Link>
+          <Link to="/portfolio" style={{ color: '#e6e6e6', fontSize: '16px', fontWeight: 700, textDecoration: 'none' }}>
+            ПОРТФОЛИО
+          </Link>
+          <Link to="/courses" style={{ color: '#e6e6e6', fontSize: '16px', fontWeight: 700, textDecoration: 'none' }}>
+            КУРСЫ
+          </Link>
+        </nav>
+        <button
+          onClick={scrollToTop}
+          aria-label="Наверх"
+          style={{
+            width: '51px',
+            height: '51px',
+            borderRadius: '50%',
+            border: '1px solid #e6e6e6',
+            backgroundColor: 'transparent',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <svg width="25" height="28" viewBox="0 0 25 28" fill="none">
+            <path d="M12.5 27V1M12.5 1L1 12.5M12.5 1L24 12.5" stroke="#e6e6e6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
       </div>
     </footer>
   )
