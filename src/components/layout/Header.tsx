@@ -5,7 +5,7 @@ const navLinks = [
   { label: 'ОБО МНЕ', to: '/about' },
   { label: 'ПОРТФОЛИО', to: '/portfolio' },
   { label: 'КУРСЫ', to: '/courses' },
-  { label: 'КОНТАКТЫ', to: '/#contacts' },
+  { label: 'КОНТАКТЫ', to: '#contacts' },
 ]
 
 export default function Header() {
@@ -17,19 +17,29 @@ export default function Header() {
       {/* Desktop */}
       <div className="hidden md:flex h-full items-center justify-center">
         <nav className="flex items-center gap-8">
-          {navLinks.map(link => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className={`text-[20px] font-bold tracking-wide transition-colors duration-200 whitespace-nowrap ${
-                location.pathname === link.to
-                  ? 'text-white'
-                  : 'text-[#e6e6e6] hover:text-white'
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map(link =>
+            link.to === '#contacts' ? (
+              <button
+                key={link.to}
+                onClick={() => document.getElementById('contacts')?.scrollIntoView({ behavior: 'smooth' })}
+                className="text-[20px] font-bold tracking-wide transition-colors duration-200 whitespace-nowrap text-[#e6e6e6] hover:text-white bg-transparent border-none cursor-pointer"
+              >
+                {link.label}
+              </button>
+            ) : (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`text-[20px] font-bold tracking-wide transition-colors duration-200 whitespace-nowrap ${
+                  location.pathname === link.to
+                    ? 'text-white'
+                    : 'text-[#e6e6e6] hover:text-white'
+                }`}
+              >
+                {link.label}
+              </Link>
+            )
+          )}
           <a
             href="https://t.me/"
             target="_blank"
@@ -72,16 +82,26 @@ export default function Header() {
       {/* Mobile menu overlay */}
       {menuOpen && (
         <div className="md:hidden fixed inset-0 top-[75px] bg-[#0e1012] z-40 flex flex-col items-center justify-center gap-8">
-          {navLinks.map(link => (
-            <Link
-              key={link.to}
-              to={link.to}
-              onClick={() => setMenuOpen(false)}
-              className="text-[#e6e6e6] text-2xl font-bold tracking-wide hover:text-white transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map(link =>
+            link.to === '#contacts' ? (
+              <button
+                key={link.to}
+                onClick={() => { setMenuOpen(false); document.getElementById('contacts')?.scrollIntoView({ behavior: 'smooth' }) }}
+                className="text-[#e6e6e6] text-2xl font-bold tracking-wide hover:text-white transition-colors bg-transparent border-none cursor-pointer"
+              >
+                {link.label}
+              </button>
+            ) : (
+              <Link
+                key={link.to}
+                to={link.to}
+                onClick={() => setMenuOpen(false)}
+                className="text-[#e6e6e6] text-2xl font-bold tracking-wide hover:text-white transition-colors"
+              >
+                {link.label}
+              </Link>
+            )
+          )}
           <a
             href="https://t.me/"
             target="_blank"

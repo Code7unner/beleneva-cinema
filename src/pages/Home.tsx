@@ -19,7 +19,7 @@ function HeroSection() {
 
       <div className="relative z-10 flex flex-col items-center text-center px-6" style={{ gap: '64px' }}>
         <img src={logo} alt="Beleneva Cinema" className="w-full max-w-[320px] md:max-w-[600px] lg:max-w-[900px]" />
-        <p style={{ fontSize: '28px', fontWeight: 500, lineHeight: '42px', letterSpacing: 0, textAlign: 'center', color: '#e6e6e6', maxWidth: '1537px', textTransform: 'uppercase' }}>
+        <p className="text-[18px] md:text-[28px]" style={{ fontWeight: 500, lineHeight: 1.5, letterSpacing: 0, textAlign: 'center', color: '#e6e6e6', maxWidth: '1537px', textTransform: 'uppercase' }}>
           Я создаю формы не ради форм. Мне важно, чтобы каждый проект говорил.<br />
           Без лишнего шума. Точно. От всего сердца.
         </p>
@@ -132,11 +132,12 @@ function FilmSlider() {
       {/* ── Row: [←] [slides] [→] ── */}
       <div style={{ display: 'flex', alignItems: 'stretch' }}>
 
-        {/* Arrow left */}
+        {/* Arrow left — hidden on mobile */}
         <button
           onClick={prev}
           aria-label="Предыдущий"
-          style={{ width: FILM_ARROW_W, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer' }}
+          className="hidden md:flex"
+          style={{ width: FILM_ARROW_W, flexShrink: 0, alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer' }}
         >
           <svg width="17" height="30" viewBox="0 0 17 30" fill="none">
             <path d="M15 2L2 15L15 28" stroke="#e6e6e6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -146,12 +147,12 @@ function FilmSlider() {
         {/* Slides area */}
         <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: '24px' }}>
 
-          {/* Image strip (clipped) */}
-          <div style={{ overflow: 'hidden', width: '100%' }}>
+          {/* Image strip — mobile: horizontal scroll, desktop: translateX */}
+          <div className="mobile-scroll md:!overflow-hidden" style={{ width: '100%' }}>
             <div
+              className="md:transition-transform md:duration-[450ms] md:ease-[cubic-bezier(0.4,0,0.2,1)]"
               style={{
                 display: 'flex',
-                transition: 'transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)',
                 transform: `translateX(-${idx * 100}%)`,
               }}
             >
@@ -197,7 +198,7 @@ function FilmSlider() {
           </p>
 
           {/* Dots */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '8px' }}>
+          <div className="hidden md:flex" style={{ justifyContent: 'center', gap: '8px' }}>
             {films.map((_, i) => (
               <button
                 key={i}
@@ -209,11 +210,12 @@ function FilmSlider() {
           </div>
         </div>
 
-        {/* Arrow right */}
+        {/* Arrow right — hidden on mobile */}
         <button
           onClick={next}
           aria-label="Следующий"
-          style={{ width: FILM_ARROW_W, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer' }}
+          className="hidden md:flex"
+          style={{ width: FILM_ARROW_W, flexShrink: 0, alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer' }}
         >
           <svg width="17" height="30" viewBox="0 0 17 30" fill="none">
             <path d="M2 2L15 15L2 28" stroke="#e6e6e6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -231,7 +233,7 @@ function EditingCard({ work, buttonText = 'ЧИТАТЬ' }: { work: { slug: stri
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
       {/* Year / city */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
         <span style={{ color: '#b3b3b3', fontSize: '18px', fontWeight: 400, lineHeight: '27px' }}>{work.year}</span>
         <span style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#8f1d1d', display: 'inline-block', flexShrink: 0 }} />
         <span style={{ color: '#b3b3b3', fontSize: '18px', fontWeight: 400, lineHeight: '27px' }}>{work.city}</span>
@@ -261,7 +263,7 @@ function EditingCard({ work, buttonText = 'ЧИТАТЬ' }: { work: { slug: stri
       </div>
 
       {/* Title + description */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', textAlign: 'center' }}>
         <p style={{ color: '#e6e6e6', fontSize: '28px', fontWeight: 500, lineHeight: 1.5, margin: 0 }}>
           {work.title}
         </p>
@@ -287,7 +289,7 @@ function EditingSlider() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
       {/* Year / city */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
         <span style={{ color: '#b3b3b3', fontSize: '18px', fontWeight: 400, lineHeight: '27px' }}>{editingSliderWorks[idx].year}</span>
         <span style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#8f1d1d', display: 'inline-block', flexShrink: 0 }} />
         <span style={{ color: '#b3b3b3', fontSize: '18px', fontWeight: 400, lineHeight: '27px' }}>{editingSliderWorks[idx].city}</span>
@@ -298,18 +300,19 @@ function EditingSlider() {
         <button
           onClick={prev}
           aria-label="Предыдущий"
-          style={{ width: EDIT_ARROW_W, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer' }}
+          className="hidden md:flex"
+          style={{ width: EDIT_ARROW_W, flexShrink: 0, alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer' }}
         >
           <svg width="17" height="30" viewBox="0 0 17 30" fill="none">
             <path d="M15 2L2 15L15 28" stroke="#e6e6e6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
 
-        <div style={{ flex: 1, minWidth: 0, overflow: 'hidden', borderRadius: '24px' }}>
+        <div className="mobile-scroll md:!overflow-hidden" style={{ flex: 1, minWidth: 0, borderRadius: '24px' }}>
           <div
+            className="md:transition-transform md:duration-[450ms] md:ease-[cubic-bezier(0.4,0,0.2,1)]"
             style={{
               display: 'flex',
-              transition: 'transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)',
               transform: `translateX(-${idx * 100}%)`,
             }}
           >
@@ -346,7 +349,8 @@ function EditingSlider() {
         <button
           onClick={next}
           aria-label="Следующий"
-          style={{ width: EDIT_ARROW_W, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer' }}
+          className="hidden md:flex"
+          style={{ width: EDIT_ARROW_W, flexShrink: 0, alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer' }}
         >
           <svg width="17" height="30" viewBox="0 0 17 30" fill="none">
             <path d="M2 2L15 15L2 28" stroke="#e6e6e6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -355,7 +359,7 @@ function EditingSlider() {
       </div>
 
       {/* Title + description */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div className="md:px-[clamp(32px,5.2vw,100px)]" style={{ display: 'flex', flexDirection: 'column', gap: '16px', textAlign: 'center' }}>
         <p style={{ color: '#e6e6e6', fontSize: '28px', fontWeight: 500, lineHeight: 1.5, margin: 0 }}>
           {editingSliderWorks[idx].title}
         </p>
@@ -365,7 +369,7 @@ function EditingSlider() {
       </div>
 
       {/* Dots */}
-      <div style={{ display: 'flex', gap: '8px' }}>
+      <div className="hidden md:flex" style={{ justifyContent: 'center', gap: '8px' }}>
         {editingSliderWorks.map((_, i) => (
           <button
             key={i}
@@ -432,7 +436,7 @@ function PortfolioSection() {
           {youtubeWorks.map(work => (
             <div key={work.slug} style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
               {/* Year / city */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
                 <span style={{ color: '#b3b3b3', fontSize: '18px', fontWeight: 400, lineHeight: '27px' }}>{work.year}</span>
                 <span style={{ width: '16px', height: '16px', borderRadius: '50%', backgroundColor: '#8f1d1d', display: 'inline-block', flexShrink: 0 }} />
                 <span style={{ color: '#b3b3b3', fontSize: '18px', fontWeight: 400, lineHeight: '27px' }}>{work.city}</span>
@@ -507,7 +511,7 @@ function CoursesSection() {
         <SectionLabel text="КУРСЫ" />
 
         <div style={{ maxWidth: '1540px', marginTop: '64px', display: 'flex', flexDirection: 'column', gap: '64px' }}>
-          <p style={{ color: '#e6e6e6', fontSize: '28px', fontWeight: 400, lineHeight: '42px', margin: 0, textTransform: 'uppercase' }}>
+          <p className="text-[18px] md:text-[28px]" style={{ color: '#e6e6e6', fontWeight: 400, lineHeight: 1.5, margin: 0, textTransform: 'uppercase' }}>
             я основала дальневосточную школу кино (двшк), где  мы учимся владеть своим телом, эмоциями, посылом, чтобы грамотно формулировать задачи и предлагать множество вариантов актерской игры
           </p>
 
@@ -572,7 +576,7 @@ function CoursesSection() {
 
 export default function Home() {
   return (
-    <Layout>
+    <Layout showReviews>
       <HeroSection />
       <AboutSection />
       <PortfolioSection />

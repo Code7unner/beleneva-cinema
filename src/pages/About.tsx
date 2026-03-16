@@ -66,7 +66,7 @@ const experienceItems = [
     city: 'ДАЛЬНИЙ ВОСТОК',
     image: aboutExpCommunity,
     title: 'Режиссерское сообщество',
-    description: 'Ведение тг-сообщества,организация лекций, мастер-классов, воркшопов. Привлечение сторонних педагогов в рамках образовательной программы, разработка и организация сценарного хакатона, объединение съемочных групп для создания дальневосточного киноальманаха.',
+    description: 'Ведение тг-сообщества, организация лекций, мастер-классов, воркшопов. Привлечение сторонних педагогов в рамках образовательной программы, разработка и организация сценарного хакатона, объединение съемочных групп для создания дальневосточного киноальманаха.',
   },
 ]
 
@@ -76,30 +76,17 @@ const hobbyGallery = [aboutHobby1, aboutHobby2, aboutHobby3, aboutHobby4]
 
 function AboutHero() {
   return (
-    <section
-      style={{
-        position: 'relative',
-        width: '100%',
-        height: '923px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
-        paddingBottom: '15vh',
-      }}
-    >
-      <img src={aboutHeroBg} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-      <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.4)' }} />
+    <section className="relative w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden" style={{ paddingBottom: '10vh' }}>
+      <img src={aboutHeroBg} alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
+      <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0,0,0,0.4)' }} />
 
-      <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '64px', textAlign: 'center', padding: '0 clamp(24px, 5vw, 80px)', maxWidth: '1298px' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-          <h1 style={{ color: '#e6e6e6', fontSize: 'clamp(32px, 3.6vw, 54px)', fontWeight: 700, lineHeight: 1.5, margin: 0, textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
-            педагог, режиссёр, креативный директор
-          </h1>
-          <p style={{ color: '#e6e6e6', fontSize: '18px', fontWeight: 400, lineHeight: 1.5, margin: 0, maxWidth: '973px', alignSelf: 'center' }}>
-            Я разрабатываю концепции и структуру проектов в кино и видеопроизводстве. Создаю образовательные программы для режиссёров и актёров, провожу мастер-классы и тренинги, направленные на развитие лидерских качеств, харизмы и уверенности.
-          </p>
-        </div>
+      <div className="relative z-10 flex flex-col items-center text-center px-6" style={{ gap: '24px' }}>
+        <h1 className="md:whitespace-nowrap" style={{ color: '#e6e6e6', fontSize: 'clamp(24px, 3.6vw, 54px)', fontWeight: 700, lineHeight: 1.5, margin: 0, textTransform: 'uppercase' }}>
+          педагог, режиссёр, креативный директор
+        </h1>
+        <p style={{ fontSize: '18px', fontWeight: 400, lineHeight: 1.5, color: '#e6e6e6', maxWidth: '973px', textAlign: 'center', margin: 0 }}>
+          Я разрабатываю концепции и структуру проектов в кино и видеопроизводстве. Создаю образовательные программы для режиссёров и актёров, провожу мастер-классы и тренинги, направленные на развитие лидерских качеств, харизмы и уверенности.
+        </p>
         <Link
           to="/portfolio"
           style={{
@@ -179,7 +166,7 @@ function EducationSection() {
           </p>
 
           {/* Diploma slider: [←] [slide] [→] — margin-top matches Figma gap (352−124−118=110px) */}
-          <div style={{ display: 'flex', alignItems: 'stretch', marginTop: '110px' }}>
+          <div style={{ display: 'flex', alignItems: 'stretch', marginTop: '40px' }}>
             {/* Left arrow */}
             <button
               onClick={prevSlide}
@@ -205,7 +192,7 @@ function EducationSection() {
                     <div style={{ width: '100%', aspectRatio: '594 / 417', borderRadius: '12px', overflow: 'hidden' }}>
                       <img src={slide.image} alt={slide.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
-                    <p style={{ color: '#e6e6e6', fontSize: 'clamp(20px, 1.46vw, 28px)', fontWeight: 500, lineHeight: 1.5, margin: 0, textTransform: 'uppercase' }}>
+                    <p style={{ color: '#e6e6e6', fontSize: 'clamp(20px, 1.46vw, 28px)', fontWeight: 500, lineHeight: 1.5, margin: 0, textTransform: 'uppercase', textAlign: 'center' }}>
                       {slide.title}
                     </p>
                   </div>
@@ -226,8 +213,11 @@ function EducationSection() {
           </div>
         </div>
 
-        {/* Right column: education list — 816/1920 ≈ 42.5% of viewport */}
-        <div style={{ width: '42.5%', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '64px' }} className="max-lg:!w-full max-lg:!px-6">
+        {/* Right column: education list — 816/1920 ≈ 42.5% of viewport, scrollable if overflows */}
+        <div
+          style={{ width: '42.5%', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '64px', maxHeight: '80vh', overflowY: 'auto', paddingRight: '16px' }}
+          className="max-lg:!w-full max-lg:!px-6 education-scroll"
+        >
           {educationItems.map((item, i) => (
             <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '12px', paddingTop: '12px', paddingBottom: '12px', borderBottom: '0.5px solid #e6e6e6' }}>
               <span style={{ color: '#b3b3b3', fontSize: '18px', fontWeight: 400, lineHeight: '27px', textTransform: 'uppercase' }}>
@@ -262,11 +252,11 @@ function ExperienceSection() {
         paddingBottom: 'clamp(64px, 5.72vw, 110px)',
       }}
     >
-      <div className="flex flex-col lg:flex-row" style={{ gap: '32px' }}>
+      <div className="mobile-scroll flex flex-row lg:flex-row" style={{ gap: '32px' }}>
         {experienceItems.map((item, i) => (
-          <div key={i} style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {/* Year / city */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div key={i} className="min-w-[80vw] md:min-w-0" style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            {/* Year / city — centered */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
               <span style={{ color: '#b3b3b3', fontSize: '18px', fontWeight: 400, lineHeight: '27px', textTransform: 'uppercase' }}>{item.year}</span>
               <span style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#8f1d1d', display: 'inline-block', flexShrink: 0 }} />
               <span style={{ color: '#b3b3b3', fontSize: '18px', fontWeight: 400, lineHeight: '27px', textTransform: 'uppercase' }}>{item.city}</span>
@@ -276,7 +266,7 @@ function ExperienceSection() {
             <div style={{ position: 'relative', width: '100%', aspectRatio: '508 / 499', borderRadius: '24px', overflow: 'hidden' }}>
               <img src={item.image} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               {item.hasButton && (
-                <div style={{ position: 'absolute', bottom: '24px', left: 0, right: 0, display: 'flex', justifyContent: 'center' }}>
+                <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <Link
                     to="/portfolio"
                     style={{
@@ -303,7 +293,7 @@ function ExperienceSection() {
             </div>
 
             {/* Title + description */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '12px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '12px', textAlign: 'center' }}>
               <h3 style={{ color: '#e6e6e6', fontSize: '28px', fontWeight: 500, lineHeight: 1.5, margin: 0, textTransform: 'uppercase' }}>
                 {item.title}
               </h3>
@@ -334,7 +324,7 @@ function HobbySection() {
     >
       <SectionLabel text="ХОББИ" />
 
-      <div style={{ marginTop: '64px', display: 'flex', flexDirection: 'column', gap: '64px', maxWidth: '1594px' }}>
+      <div style={{ marginTop: '64px', display: 'flex', flexDirection: 'column', gap: '64px', maxWidth: '1594px', textAlign: 'center' }}>
         {/* Dance video image with text overlay */}
         <div
           style={{
@@ -345,17 +335,18 @@ function HobbySection() {
             overflow: 'hidden',
             display: 'flex',
             alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
           <img src={aboutHobbyDance} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
           <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(14,16,18,0.5)' }} />
-          <p style={{ position: 'relative', zIndex: 1, color: '#e6e6e6', fontSize: '32px', fontWeight: 500, lineHeight: 1.5, margin: 0, textTransform: 'uppercase', padding: '0 clamp(24px, 5vw, 80px)', maxWidth: '751px' }}>
-            Я изучаю йогу, провожу мастер-классы по растяжке, расслаблению и медитации
+          <p className="text-[20px] md:text-[32px]" style={{ position: 'relative', zIndex: 1, color: '#e6e6e6', fontWeight: 500, lineHeight: 1.5, margin: 0, textTransform: 'uppercase', textAlign: 'center', padding: '0 clamp(24px, 5vw, 80px)' }}>
+            Я изучаю йогу, провожу мастер-классы<br />по растяжке, расслаблению и медитации
           </p>
         </div>
 
         {/* Description text */}
-        <p style={{ color: '#e6e6e6', fontSize: '28px', fontWeight: 400, lineHeight: 1.5, margin: 0, textTransform: 'uppercase' }}>
+        <p className="text-[18px] md:text-[28px]" style={{ color: '#e6e6e6', fontWeight: 400, lineHeight: 1.5, margin: 0, textTransform: 'uppercase' }}>
           У меня 10 лет опыта в классическом балете, пластическом театре в Санкт-Петербурге и SMStretching в Москве.
         </p>
 
@@ -369,7 +360,7 @@ function HobbySection() {
         </div>
 
         {/* Closing text */}
-        <p style={{ color: '#e6e6e6', fontSize: '28px', fontWeight: 400, lineHeight: 1.5, margin: 0, textTransform: 'uppercase' }}>
+        <p className="text-[18px] md:text-[28px]" style={{ color: '#e6e6e6', fontWeight: 400, lineHeight: 1.5, margin: 0, textTransform: 'uppercase' }}>
           Эти практики помогают мне сохранять внимание, концентрацию и устойчивость в профессии, и я делюсь ими с учениками и командами в проектах.
         </p>
       </div>
