@@ -5,6 +5,7 @@ import SectionLabel from '../components/ui/SectionLabel'
 import { films, editingSliderWorks, editingStandaloneWork, youtubeWorks } from '../data/films'
 import { courses } from '../data/courses'
 import heroBg from '../assets/hero-bg.png'
+import heroVideo from '../assets/main-background.MP4'
 import logo from '../assets/logo.png'
 import iraPhoto from '../assets/ira-photo.png'
 
@@ -12,14 +13,22 @@ import iraPhoto from '../assets/ira-photo.png'
 
 function HeroSection() {
   return (
-    <section className="relative w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden" style={{ paddingBottom: '10vh' }}>
-      <img src={heroBg} alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
+    <section className="relative w-full h-screen min-h-[540px] md:min-h-[600px] flex items-center justify-center overflow-hidden" style={{ paddingBottom: '10vh' }}>
+      <video
+        src={heroVideo}
+        autoPlay
+        loop
+        muted
+        playsInline
+        poster={heroBg}
+        className="absolute inset-0 w-full h-full object-cover object-center"
+      />
       <div className="absolute inset-0" style={{ backgroundColor: 'rgba(14,16,18,0.6)' }} />
       <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(14,16,18,0.3), transparent 40%, rgba(14,16,18,0.8))' }} />
 
-      <div className="relative z-10 flex flex-col items-center text-center px-6" style={{ gap: '64px' }}>
+      <div className="relative z-10 flex flex-col items-center text-center px-6 gap-12 md:gap-16">
         <img src={logo} alt="Beleneva Cinema" className="w-full max-w-[320px] md:max-w-[600px] lg:max-w-[900px]" />
-        <p className="text-[18px] md:text-[28px]" style={{ fontWeight: 500, lineHeight: 1.5, letterSpacing: 0, textAlign: 'center', color: '#e6e6e6', maxWidth: '1537px', textTransform: 'uppercase' }}>
+        <p className="text-[16px] md:text-[28px]" style={{ fontWeight: 500, lineHeight: 1.5, letterSpacing: 0, textAlign: 'center', color: '#e6e6e6', maxWidth: '1537px', textTransform: 'uppercase' }}>
           Я создаю формы не ради форм. Мне важно, чтобы каждый проект говорил.<br />
           Без лишнего шума. Точно. От всего сердца.
         </p>
@@ -35,13 +44,70 @@ function AboutSection() {
     <section className="w-full" style={{ backgroundColor: '#0e1012', boxSizing: 'border-box' }}>
       <div
         style={{
-          paddingTop: 'clamp(64px, 7.03vw, 135px)',
-          paddingBottom: 'clamp(48px, 5.42vw, 104px)',
+          paddingTop: 'clamp(64px, 4.17vw, 80px)',
+          paddingBottom: 'clamp(48px, 4.17vw, 80px)',
           paddingLeft: 'clamp(24px, 9.84vw, 189px)',
           paddingRight: 'clamp(24px, 9.58vw, 184px)',
         }}
       >
-        <div className="flex flex-col lg:flex-row" style={{ gap: '32px', alignItems: 'flex-start' }}>
+        {/* ── Mobile layout (< md) ── */}
+        <div className="flex flex-col md:hidden" style={{ gap: '32px' }}>
+          {/* Section label */}
+          <div className="flex items-center gap-3">
+            <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: '#8f1d1d' }} />
+            <span style={{ color: '#e6e6e6', fontSize: '16px', fontWeight: 700, lineHeight: '36px' }}>ОБО МНЕ</span>
+          </div>
+
+          {/* Photo + name/role row */}
+          <div className="flex" style={{ gap: '16px', alignItems: 'flex-start' }}>
+            <div style={{ width: '48%', flexShrink: 0, borderRadius: '24px', overflow: 'hidden', aspectRatio: '197/283' }}>
+              <img
+                src={iraPhoto}
+                alt="Ирина Беленева"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }}
+              />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', justifyContent: 'center', flex: 1, minWidth: 0 }}>
+              <h2 style={{ color: '#e6e6e6', fontSize: '32px', fontWeight: 700, lineHeight: 1.2, margin: 0, textTransform: 'uppercase' }}>
+                Привет, я Ирина Беленева
+              </h2>
+              <p style={{ color: '#e6e6e6', fontSize: '16px', fontWeight: 500, lineHeight: 1.5, margin: 0, textTransform: 'uppercase' }}>
+                педагог,<br />режиссёр,<br />креативный директор
+              </p>
+            </div>
+          </div>
+
+          {/* Body text */}
+          <p style={{ color: '#e6e6e6', fontSize: '16px', fontWeight: 400, lineHeight: 1.5, margin: 0 }}>
+            Я разрабатываю концепции и структуру проектов в кино и видеопроизводстве.{' '}
+            Работаю индивидуально и с командами.{' '}
+            Моя цель — глубина, ясность и результат.
+          </p>
+
+          {/* Button */}
+          <Link
+            to="/about"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#e6e6e6',
+              color: '#0e1012',
+              fontSize: '14px',
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              padding: '16px 32px',
+              borderRadius: '32px',
+              textDecoration: 'none',
+              alignSelf: 'flex-start',
+            }}
+          >
+            подробнее обо мне
+          </Link>
+        </div>
+
+        {/* ── Desktop layout (md+) ── */}
+        <div className="hidden md:flex flex-col lg:flex-row" style={{ gap: '32px', alignItems: 'flex-start' }}>
 
           {/* Left: text block */}
           <div className="flex-1 min-w-0" style={{ display: 'flex', flexDirection: 'column', gap: '80px' }}>
@@ -55,19 +121,19 @@ function AboutSection() {
             {/* Texts */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
               <h2
-                className="text-[32px] md:text-[42px] xl:text-[54px]"
+                className="text-[42px] xl:text-[54px]"
                 style={{ color: '#e6e6e6', fontWeight: 700, lineHeight: 1.5, margin: 0, textTransform: 'uppercase' }}
               >
                 Привет, я Ирина Беленева
               </h2>
               <p
-                className="text-[20px] md:text-[24px] xl:text-[28px]"
+                className="text-[24px] xl:text-[28px]"
                 style={{ color: '#e6e6e6', fontWeight: 500, lineHeight: 1.5, margin: 0, textTransform: 'uppercase' }}
               >
                 педагог, режиссёр, креативный директор
               </p>
               <p
-                className="text-[18px] md:text-[20px] xl:text-[24px]"
+                className="text-[20px] xl:text-[24px]"
                 style={{ color: '#e6e6e6', fontWeight: 400, lineHeight: 1.5, margin: 0 }}
               >
                 Я разрабатываю концепции и структуру проектов в кино и видеопроизводстве.{' '}
@@ -150,18 +216,20 @@ function FilmSlider() {
           {/* Image strip — mobile: horizontal scroll, desktop: translateX */}
           <div className="mobile-scroll md:!overflow-hidden" style={{ width: '100%' }}>
             <div
-              className="md:transition-transform md:duration-[450ms] md:ease-[cubic-bezier(0.4,0,0.2,1)]"
+              className="flex w-max md:w-auto gap-3 md:gap-0 !translate-x-0 md:!translate-x-[var(--slide-offset)] md:transition-transform md:duration-[450ms] md:ease-[cubic-bezier(0.4,0,0.2,1)]"
               style={{
-                display: 'flex',
-                transform: `translateX(-${idx * 100}%)`,
-              }}
+                '--slide-offset': `-${idx * 100}%`,
+              } as React.CSSProperties}
             >
               {films.map(film => (
                 <div
                   key={film.slug}
-                  style={{ width: '100%', flexShrink: 0, position: 'relative', aspectRatio: '1300/706', overflow: 'hidden', borderRadius: '24px' }}
+                  className="w-[320px] md:w-full flex-shrink-0 md:flex-shrink-0"
+                  style={{ position: 'relative', overflow: 'hidden', borderRadius: '20px' }}
                 >
-                  <img src={film.slide} alt={film.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <div className="aspect-[320/367] md:aspect-[1300/706]">
+                    <img src={film.slide} alt={film.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </div>
 
                   {/* Watch button */}
                   <div style={{ position: 'absolute', bottom: 'clamp(12px, 1.8vw, 28px)', left: 0, right: 0, display: 'flex', justifyContent: 'center' }}>
@@ -193,7 +261,7 @@ function FilmSlider() {
           </div>
 
           {/* Film title */}
-          <p style={{ color: '#e6e6e6', fontSize: 'clamp(16px, 1.46vw, 28px)', fontWeight: 500, lineHeight: 1.5, textAlign: 'center', margin: 0 }}>
+          <p className="text-[16px] md:text-[clamp(16px,1.46vw,28px)]" style={{ color: '#e6e6e6', fontWeight: 500, lineHeight: 1.5, textAlign: 'center', margin: 0 }}>
             {films[idx].title} ({films[idx].year})
           </p>
 
@@ -231,7 +299,7 @@ function FilmSlider() {
 
 function EditingCard({ work, buttonText = 'ЧИТАТЬ' }: { work: { slug: string; title: string; year: string; city: string; role: string; thumbnail: string }; buttonText?: string }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+    <div className="w-[320px] md:w-full flex-shrink-0" style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
       {/* Year / city */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
         <span style={{ color: '#b3b3b3', fontSize: '18px', fontWeight: 400, lineHeight: '27px' }}>{work.year}</span>
@@ -264,7 +332,7 @@ function EditingCard({ work, buttonText = 'ЧИТАТЬ' }: { work: { slug: stri
 
       {/* Title + description */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', textAlign: 'center' }}>
-        <p style={{ color: '#e6e6e6', fontSize: '28px', fontWeight: 500, lineHeight: 1.5, margin: 0 }}>
+        <p className="text-[16px] md:text-[28px]" style={{ color: '#e6e6e6', fontWeight: 500, lineHeight: 1.5, margin: 0 }}>
           {work.title}
         </p>
         <p style={{ color: '#b3b3b3', fontSize: '18px', fontWeight: 400, lineHeight: '27px', margin: 0 }}>
@@ -310,17 +378,16 @@ function EditingSlider() {
 
         <div className="mobile-scroll md:!overflow-hidden" style={{ flex: 1, minWidth: 0, borderRadius: '24px' }}>
           <div
-            className="md:transition-transform md:duration-[450ms] md:ease-[cubic-bezier(0.4,0,0.2,1)]"
+            className="flex w-max md:w-auto gap-3 md:gap-0 !translate-x-0 md:!translate-x-[var(--slide-offset)] md:transition-transform md:duration-[450ms] md:ease-[cubic-bezier(0.4,0,0.2,1)]"
             style={{
-              display: 'flex',
-              transform: `translateX(-${idx * 100}%)`,
-            }}
+              '--slide-offset': `-${idx * 100}%`,
+            } as React.CSSProperties}
           >
             {editingSliderWorks.map(work => (
               <div
                 key={work.slug}
-                className="editing-cover"
-                style={{ width: '100%', flexShrink: 0, position: 'relative', overflow: 'hidden' }}
+                className="editing-cover w-[320px] md:w-full flex-shrink-0"
+                style={{ position: 'relative', overflow: 'hidden' }}
               >
                 <img src={work.thumbnail} alt={work.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 <div style={{ position: 'absolute', bottom: '24px', left: 0, right: 0, display: 'flex', justifyContent: 'center' }}>
@@ -360,7 +427,7 @@ function EditingSlider() {
 
       {/* Title + description */}
       <div className="md:px-[clamp(32px,5.2vw,100px)]" style={{ display: 'flex', flexDirection: 'column', gap: '16px', textAlign: 'center' }}>
-        <p style={{ color: '#e6e6e6', fontSize: '28px', fontWeight: 500, lineHeight: 1.5, margin: 0 }}>
+        <p className="text-[16px] md:text-[28px]" style={{ color: '#e6e6e6', fontWeight: 500, lineHeight: 1.5, margin: 0 }}>
           {editingSliderWorks[idx].title}
         </p>
         <p style={{ color: '#b3b3b3', fontSize: '18px', fontWeight: 400, lineHeight: '27px', margin: 0 }}>
@@ -390,8 +457,8 @@ function PortfolioSection() {
     <section className="w-full" style={{ backgroundColor: '#0e1012' }}>
       <div
         style={{
-          paddingTop: 'clamp(64px, 5.72vw, 110px)',
-          paddingBottom: 'clamp(64px, 5.72vw, 110px)',
+          paddingTop: 'clamp(64px, 4.17vw, 80px)',
+          paddingBottom: 'clamp(64px, 4.17vw, 80px)',
           paddingLeft: 'clamp(24px, 9.84vw, 189px)',
           paddingRight: 'clamp(24px, 9.58vw, 184px)',
         }}
@@ -399,7 +466,7 @@ function PortfolioSection() {
         <SectionLabel text="ПОРТФОЛИО" />
 
         {/* ── КИНО ── */}
-        <div style={{ marginTop: '80px', display: 'flex', flexDirection: 'column', gap: '64px' }}>
+        <div className="mt-16 md:mt-20 flex flex-col gap-16">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', textAlign: 'center' }}>
             <h3 className="text-[32px] md:text-[42px] xl:text-[54px]" style={{ color: '#e6e6e6', fontWeight: 700, lineHeight: 1.5, margin: 0 }}>
               КИНО
@@ -413,12 +480,20 @@ function PortfolioSection() {
         </div>
 
         {/* ── РЕДАКТУРА ── */}
-        <div style={{ marginTop: '80px', display: 'flex', flexDirection: 'column', gap: '64px' }}>
+        <div className="mt-16 md:mt-20 flex flex-col gap-16">
           <h3 className="text-[32px] md:text-[42px] xl:text-[54px]" style={{ color: '#e6e6e6', fontWeight: 700, lineHeight: 1.5, margin: 0, textAlign: 'center' }}>
             РЕДАКТУРА
           </h3>
-          {/* Slider (left, ~61%) + Standalone card (right, ~37%) */}
-          <div className="flex flex-col lg:flex-row" style={{ gap: '25px', alignItems: 'flex-start' }}>
+          {/* Mobile: horizontal scroll of all editing cards. Desktop: slider + standalone */}
+          <div className="md:hidden">
+            <div className="mobile-scroll flex gap-4">
+              {editingSliderWorks.map(work => (
+                <EditingCard key={work.slug} work={work} buttonText="ЧИТАТЬ СЦЕНАРИЙ" />
+              ))}
+              <EditingCard work={editingStandaloneWork} />
+            </div>
+          </div>
+          <div className="hidden md:flex flex-col lg:flex-row" style={{ gap: '25px', alignItems: 'flex-start' }}>
             <div style={{ width: '61.3%', flexShrink: 0 }} className="max-lg:!w-full">
               <EditingSlider />
             </div>
@@ -429,7 +504,7 @@ function PortfolioSection() {
         </div>
 
         {/* ── ЮТУБ ── */}
-        <div style={{ marginTop: '80px', display: 'flex', flexDirection: 'column', gap: '64px' }}>
+        <div className="mt-16 md:mt-20 flex flex-col gap-16">
           <h3 className="text-[32px] md:text-[42px] xl:text-[54px]" style={{ color: '#e6e6e6', fontWeight: 700, lineHeight: 1.5, margin: 0, textAlign: 'center' }}>
             ЮТУБ
           </h3>
@@ -441,15 +516,56 @@ function PortfolioSection() {
                 <span style={{ width: '16px', height: '16px', borderRadius: '50%', backgroundColor: '#8f1d1d', display: 'inline-block', flexShrink: 0 }} />
                 <span style={{ color: '#b3b3b3', fontSize: '18px', fontWeight: 400, lineHeight: '27px' }}>{work.city}</span>
               </div>
-              {/* Video frame */}
+
+              {/* ── Mobile YouTube card ── */}
+              <div className="md:hidden flex flex-col gap-4">
+                {/* Image with button */}
+                <div style={{ position: 'relative', width: '100%', borderRadius: '24px', overflow: 'hidden' }}>
+                  <img src={work.thumbnail} alt={work.title} style={{ width: '100%', display: 'block', aspectRatio: '16/9', objectFit: 'cover' }} />
+                  <div style={{ position: 'absolute', bottom: '12px', left: 0, right: 0, display: 'flex', justifyContent: 'center' }}>
+                    <Link
+                      to={`/films/${work.slug}`}
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '10px',
+                        backgroundColor: '#e6e6e6',
+                        color: '#0e1012',
+                        fontSize: '14px',
+                        fontWeight: 700,
+                        textTransform: 'uppercase',
+                        padding: '16px 32px',
+                        borderRadius: '32px',
+                        textDecoration: 'none',
+                      }}
+                    >
+                      <svg width="12" height="14" viewBox="0 0 12 14" fill="none">
+                        <path d="M1 1.5L11 7L1 12.5V1.5Z" fill="#0e1012" stroke="#0e1012" strokeWidth="1.5" strokeLinejoin="round"/>
+                      </svg>
+                      СМОТРЕТЬ ТРЕЙЛЕР
+                    </Link>
+                  </div>
+                </div>
+                {/* Title + description below image */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', textAlign: 'center' }}>
+                  <p style={{ color: '#e6e6e6', fontSize: '16px', fontWeight: 500, lineHeight: 1.5, margin: 0 }}>
+                    {work.title}
+                  </p>
+                  <p style={{ color: '#b3b3b3', fontSize: '14px', fontWeight: 400, lineHeight: '21px', margin: 0 }}>
+                    {work.description}
+                  </p>
+                </div>
+              </div>
+
+              {/* ── Desktop YouTube card ── */}
               <div
+                className="hidden md:flex"
                 style={{
                   position: 'relative',
                   width: '100%',
                   aspectRatio: '1540/739',
                   borderRadius: '24px',
                   overflow: 'hidden',
-                  display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}
@@ -502,20 +618,74 @@ function CoursesSection() {
     <section className="w-full" style={{ backgroundColor: '#0e1012' }}>
       <div
         style={{
-          paddingTop: 'clamp(64px, 5.72vw, 110px)',
-          paddingBottom: 'clamp(64px, 5.72vw, 110px)',
+          paddingTop: 'clamp(64px, 4.17vw, 80px)',
+          paddingBottom: 'clamp(64px, 4.17vw, 80px)',
           paddingLeft: 'clamp(24px, 9.84vw, 189px)',
           paddingRight: 'clamp(24px, 9.58vw, 184px)',
         }}
       >
         <SectionLabel text="КУРСЫ" />
 
-        <div style={{ maxWidth: '1540px', marginTop: '64px', display: 'flex', flexDirection: 'column', gap: '64px' }}>
+        <div className="mt-12 md:mt-16" style={{ maxWidth: '1540px', display: 'flex', flexDirection: 'column', gap: '64px' }}>
           <p className="text-[18px] md:text-[28px]" style={{ color: '#e6e6e6', fontWeight: 400, lineHeight: 1.5, margin: 0, textTransform: 'uppercase' }}>
             я основала дальневосточную школу кино (двшк), где  мы учимся владеть своим телом, эмоциями, посылом, чтобы грамотно формулировать задачи и предлагать множество вариантов актерской игры
           </p>
 
-          <div className="flex flex-col lg:flex-row" style={{ gap: '24px' }}>
+          {/* Mobile: horizontal scroll */}
+          <div className="mobile-scroll flex gap-1 md:hidden">
+            {courses.map(course => (
+              <div
+                key={course.id}
+                className="w-[400px] flex-shrink-0"
+                style={{
+                  backgroundColor: '#313131',
+                  borderRadius: '32px',
+                  padding: '32px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '64px',
+                }}
+              >
+                <p style={{ color: '#b3b3b3', fontSize: '18px', fontWeight: 400, lineHeight: '27px', margin: 0, textTransform: 'uppercase' }}>
+                  {course.subtitle}
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', flex: 1 }}>
+                  <h3 style={{ color: '#e6e6e6', fontSize: '28px', fontWeight: 500, lineHeight: '42px', margin: 0, textTransform: 'uppercase' }}>
+                    {course.title}
+                  </h3>
+                  <p style={{ color: '#e6e6e6', fontSize: '18px', fontWeight: 400, lineHeight: '27px', margin: 0 }}>
+                    {course.description}
+                  </p>
+                </div>
+                <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap' }}>
+                  {course.buttons.map(btn => (
+                    <Link
+                      key={btn.label}
+                      to="/courses"
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: '#e6e6e6',
+                        color: '#0e1012',
+                        fontSize: '14px',
+                        fontWeight: 700,
+                        textTransform: 'uppercase',
+                        padding: '16px 32px',
+                        borderRadius: '32px',
+                        textDecoration: 'none',
+                      }}
+                    >
+                      {btn.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop: flex row */}
+          <div className="hidden md:flex flex-col lg:flex-row" style={{ gap: '24px' }}>
             {courses.map(course => (
               <div
                 key={course.id}

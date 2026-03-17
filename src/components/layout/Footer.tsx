@@ -16,8 +16,9 @@ export default function Footer({ showReviews = false }: { showReviews?: boolean 
       <div
         style={{
           paddingTop: 'clamp(64px, 10.26vw, 197px)',
-          paddingLeft: 'clamp(24px, 9.84vw, 189px)',
-          paddingRight: 'clamp(24px, 9.58vw, 184px)',
+          paddingLeft: 'clamp(16px, 9.84vw, 189px)',
+          paddingRight: 'clamp(16px, 9.58vw, 184px)',
+          paddingBottom: '64px',
         }}
       >
         {showReviews ? (
@@ -140,9 +141,33 @@ export default function Footer({ showReviews = false }: { showReviews?: boolean 
         )}
       </div>
 
-      {/* Bottom menu */}
+      {/* Mobile: scroll-up button — floats bottom-right of contacts area */}
+      <div className="flex md:hidden justify-end" style={{ paddingRight: '32px', paddingBottom: '32px' }}>
+        <button
+          onClick={scrollToTop}
+          aria-label="Наверх"
+          style={{
+            width: '48px',
+            height: '46px',
+            borderRadius: '70px',
+            border: '1px solid #e6e6e6',
+            backgroundColor: 'transparent',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0px 0px 18px 0px #e6e6e6',
+          }}
+        >
+          <svg width="20" height="22" viewBox="0 0 25 28" fill="none">
+            <path d="M12.5 27V1M12.5 1L1 12.5M12.5 1L24 12.5" stroke="#e6e6e6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Desktop bottom menu */}
       <div
-        className="flex items-center justify-between md:justify-between"
+        className="hidden md:flex items-center justify-between"
         style={{
           height: '195px',
           paddingLeft: 'clamp(24px, 9.84vw, 189px)',
@@ -151,7 +176,7 @@ export default function Footer({ showReviews = false }: { showReviews?: boolean 
           marginTop: 'clamp(48px, 5vw, 100px)',
         }}
       >
-        <nav className="hidden md:flex items-center gap-8 lg:gap-[308px]">
+        <nav className="flex items-center gap-8 lg:gap-[308px]">
           <Link to="/about" style={{ color: '#e6e6e6', fontSize: '16px', fontWeight: 700, textDecoration: 'none' }}>
             ОБО МНЕ
           </Link>
@@ -163,45 +188,9 @@ export default function Footer({ showReviews = false }: { showReviews?: boolean 
           </Link>
         </nav>
 
-        {/* Mobile: Telegram + scroll-up in a row */}
-        <div className="flex md:hidden items-center gap-4 w-full justify-between">
-          <a
-            href="https://t.me/"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Telegram"
-            style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px' }}
-          >
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-              <path d="M23.2 9.5L20.5 22.8C20.3 23.7 19.7 24 18.9 23.5L14.9 20.6L13 22.4C12.8 22.6 12.6 22.8 12.2 22.8L12.5 18.7L20 12C20.3 11.7 19.9 11.6 19.5 11.9L10.4 17.6L6.5 16.4C5.6 16.1 5.6 15.5 6.7 15L22.1 9.1C22.8 8.8 23.5 9.2 23.2 9.5Z" fill="#e6e6e6" />
-            </svg>
-          </a>
-          <button
-            onClick={scrollToTop}
-            aria-label="Наверх"
-            style={{
-              width: '51px',
-              height: '51px',
-              borderRadius: '50%',
-              border: '1px solid #e6e6e6',
-              backgroundColor: 'transparent',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <svg width="25" height="28" viewBox="0 0 25 28" fill="none">
-              <path d="M12.5 27V1M12.5 1L1 12.5M12.5 1L24 12.5" stroke="#e6e6e6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Desktop: scroll-up button */}
         <button
           onClick={scrollToTop}
           aria-label="Наверх"
-          className="hidden md:flex"
           style={{
             width: '51px',
             height: '51px',
@@ -209,6 +198,7 @@ export default function Footer({ showReviews = false }: { showReviews?: boolean 
             border: '1px solid #e6e6e6',
             backgroundColor: 'transparent',
             cursor: 'pointer',
+            display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
           }}
@@ -224,47 +214,48 @@ export default function Footer({ showReviews = false }: { showReviews?: boolean 
 
 function ContactsLabel() {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '64px' }}>
-      <span style={{ width: '16px', height: '16px', borderRadius: '50%', backgroundColor: '#8f1d1d', flexShrink: 0, display: 'inline-block' }} />
-      <span style={{ color: '#e6e6e6', fontSize: '24px', fontWeight: 700, lineHeight: '36px' }}>КОНТАКТЫ</span>
+    <div className="flex items-center gap-3 md:gap-16">
+      <span className="w-2.5 h-2.5 md:w-4 md:h-4 rounded-full bg-[#8f1d1d] flex-shrink-0 inline-block" />
+      <span className="text-[16px] md:text-[24px] font-bold text-[#e6e6e6]" style={{ lineHeight: '36px' }}>КОНТАКТЫ</span>
     </div>
   )
 }
 
 function ContactsContent({ centered = false }: { centered?: boolean }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '64px' }}>
-      <h2 className="text-[24px] md:text-[32px]" style={{ color: '#e6e6e6', fontWeight: 500, lineHeight: 1.5, margin: 0, textTransform: 'uppercase', ...(centered ? { textAlign: 'center' as const } : {}) }}>
+    <div className="flex flex-col gap-16">
+      <h2 className="text-[22px] md:text-[32px]" style={{ color: '#e6e6e6', fontWeight: 500, lineHeight: 1.5, margin: 0, textTransform: 'uppercase', ...(centered ? { textAlign: 'center' as const } : {}) }}>
         Свяжитесь со мной любым удобным способом
       </h2>
 
-      <div className={centered ? 'flex-col md:flex-row' : 'flex-col'} style={{ display: 'flex', alignItems: centered ? 'flex-start' : 'flex-start', gap: '32px', width: '100%' }}>
+      <div className="flex flex-col gap-6 w-full" style={centered ? {} : {}}>
         {/* Email */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', flex: 1 }}>
-          <span className="text-[14px] md:text-[18px]" style={{ color: '#b3b3b3', fontWeight: 400, textTransform: 'uppercase' }}>Email</span>
-          <a href="mailto:beleneva_irina@mail.ru" className="text-[18px] md:text-[24px]" style={{ color: '#e6e6e6', fontWeight: 500, textDecoration: 'none', textTransform: 'uppercase' }}>
+        <div className="flex flex-col gap-2 uppercase">
+          <span className="text-[13px] md:text-[18px] text-[#b3b3b3]" style={{ letterSpacing: '-0.65px' }}>Email</span>
+          <a href="mailto:beleneva_irina@mail.ru" className="text-[15px] md:text-[24px] font-medium text-[#e6e6e6]" style={{ textDecoration: 'none' }}>
             Beleneva_irina@mail.ru
           </a>
         </div>
 
         {/* Phone */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', flex: 1 }}>
-          <span className="text-[14px] md:text-[18px]" style={{ color: '#b3b3b3', fontWeight: 400, textTransform: 'uppercase' }}>Телефон</span>
-          <a href="tel:+79811690818" className="text-[18px] md:text-[24px]" style={{ color: '#e6e6e6', fontWeight: 500, textDecoration: 'none' }}>
+        <div className="flex flex-col gap-2 uppercase">
+          <span className="text-[13px] md:text-[18px] text-[#b3b3b3]" style={{ letterSpacing: '-0.65px' }}>Телефон</span>
+          <a href="tel:+79811690818" className="text-[15px] md:text-[24px] font-medium text-[#e6e6e6]" style={{ textDecoration: 'none' }}>
             + 7 (981) 169 0818
           </a>
         </div>
 
         {/* Telegram icon */}
         <a
-          href="https://t.me/"
+          href="https://t.me/BelenevaRa"
           target="_blank"
           rel="noreferrer"
           aria-label="Telegram"
-          style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', flexShrink: 0 }}
+          className="w-[46px] h-[46px] md:w-[32px] md:h-[32px] flex-shrink-0 inline-flex items-center justify-center"
         >
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <path d="M23.2 9.5L20.5 22.8C20.3 23.7 19.7 24 18.9 23.5L14.9 20.6L13 22.4C12.8 22.6 12.6 22.8 12.2 22.8L12.5 18.7L20 12C20.3 11.7 19.9 11.6 19.5 11.9L10.4 17.6L6.5 16.4C5.6 16.1 5.6 15.5 6.7 15L22.1 9.1C22.8 8.8 23.5 9.2 23.2 9.5Z" fill="#e6e6e6" />
+          <svg viewBox="0 0 46 46" fill="none" className="w-full h-full">
+            <rect x="0.5" y="0.5" width="45" height="45" rx="15.5" stroke="#e6e6e6" strokeWidth="1.6" />
+            <path d="M31.5 15.5L28 30.5C27.7 31.6 27 32 26 31.3L21.2 27.8L19 30C18.7 30.3 18.5 30.5 18 30.5L18.4 25.5L27.5 18C27.8 17.7 27.4 17.5 26.9 17.8L15.8 24.5L11 23C9.9 22.7 9.9 22 11.3 21.4L30 14.5C30.8 14.2 31.7 14.7 31.5 15.5Z" fill="#e6e6e6" />
           </svg>
         </a>
       </div>
